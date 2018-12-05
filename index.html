@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creacion, sustitucion y borrado</title>
+	<style type="text/css">
+
+        body{
+            text-align: center;
+        }
+     	.miClase{
+			color: red;
+			font-size: 1.2em;
+			display: block;
+			width: 25%;
+			margin: 10px auto;
+			background: #d1d1d1;
+			text-align: center;
+		}
+		
+		textarea{
+			width: 350px;
+			height: 70px;
+		}
+		img{
+			display: block;
+			margin: 10px auto;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+
+		window.addEventListener("load",inicio);
+
+		function inicio(){
+			document.getElementById("crearParrafo").addEventListener("click", crearParrafo);
+			document.getElementById("crearImagen").addEventListener("click", crearImagen);
+			document.getElementById("borrarUltimo").addEventListener("click", borrarUltimo);
+			document.getElementById("borrarPrimero").addEventListener("click", borrarPrimero);
+			document.getElementById("sustituirPrimero").addEventListener("click", sustituirPrimero);
+		}
+
+        function crearParrafo(){
+        	//crear elemento
+        	var parrafo = document.createElement("div"); //creo el elemento
+
+        	//crear texto
+        	var texto = document.createTextNode(document.getElementById("texto").value);
+        	parrafo.appendChild(texto); //le añado el texto que he creado al parrafo.
+
+        	//añadir atributos class, y miClase como la clase.
+        	parrafo.setAttribute("class","miClase");
+        	var contenedor = document.getElementById("div1");
+        	contenedor.appendChild(parrafo);
+
+        }
+
+        function crearImagen(){
+        	//crear elemento
+        	var imagen = document.createElement("img");
+        	
+        	//añadir atributos
+        	var ruta = prompt("Introduce la ruta");
+        	imagen.setAttribute("alt", ruta);
+        	imagen.src = ruta;
+
+        	var cont = document.getElementById("div1");
+        	cont.appendChild(imagen);
+        }
+
+        function borrarUltimo(){
+            var cont = document.getElementById("div1");
+            var hijo = cont.lastChild; //seleccionar el ultimo hijo
+            //Eliminar un elemento hijo
+            cont.removeChild(hijo);
+        }
+
+        function borrarPrimero(){
+        	var cont = document.getElementById("div1");
+        	var hijo = cont.firstChild; //seleccino el primer hijo
+        	//eliminar un elemento hijo
+        	cont.removeChild(hijo);
+        }
+
+        function sustituirPrimero(){
+        	var cont = document.getElementById("div1");
+        	var parrafo = document.createElement("p");
+        	var texto = document.createTextNode('Vacio');
+        	parrafo.appendChild(texto);
+
+        	cont.replaceChild(parrafo, cont.firstChild);
+        }
+	</script>
+
+</head>
+<body>
+    <h1>Creacion, Sustitución y Borrado en Javascript</h1>
+	<div id="div1"></div>
+	<textarea id="texto"></textarea><br><br>
+	<button id="crearParrafo">Crear parrafo</button>
+	<button id="crearImagen">Crear imagen</button>
+	<button id="borrarUltimo">Borra ultimo</button>
+	<button id="borrarPrimero">Borra primero</button>
+	<button id="sustituirPrimero">Sustituir primer parrafo por 'vacio'</button>
+</body>
+</html>
